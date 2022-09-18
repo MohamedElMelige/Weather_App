@@ -15,20 +15,13 @@ class AppCubit extends Cubit<AppStates>{
   CurrentWeatherModel? currentWeatherModel;
   static AppCubit get(context) => BlocProvider.of(context);
   void getCurrentWeather() async {
-    Dio dio = Dio(
-      BaseOptions(
-        baseUrl: 'https://api.weatherapi.com',
-        receiveDataWhenStatusError: true,
-      ),
-    );
-
     emit(GetCurrentWeatherLoading());
 
     Response currentWeatherResponse =
     await DioHelper.getData(url: forecast, query: {
       'key': '3abc4ac71f114deb86380405201809',
       'q': 'Cairo',
-      'days': 1,
+      'days': 7,
       'aqi': 'no',
       'alerts': 'no',
     });
@@ -42,6 +35,7 @@ class AppCubit extends Cubit<AppStates>{
 
     debugPrint(currentWeatherModel!.location.name);
     debugPrint(currentWeatherModel!.current.tempC.toString());
-    debugPrint(currentWeatherModel!.current.condition);
+    debugPrint(currentWeatherModel!.current.condition.text);
+    debugPrint(currentWeatherModel!.forecast.forecastday[1].toString());
   }
 }

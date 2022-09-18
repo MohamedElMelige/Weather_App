@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectphase201/shared/cubit/cubit.dart';
+import 'package:projectphase201/shared/cubit/cubit_state.dart';
 
 import 'weather_body.dart';
 
@@ -7,11 +10,21 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Padding(
-        padding: EdgeInsets.only(),
+    return BlocProvider(
+      create: (context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Scaffold(
+            drawer: Padding(
+              padding: EdgeInsets.only(),
+            ),
+            body: const WeatherWidget(),
+          );
+        },
       ),
-      body: const WeatherWidget(),
     );
   }
 }

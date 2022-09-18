@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projectphase201/shared/cubit/cubit.dart';
 
 import 'layout/weather_page.dart';
+import 'shared/network/remote/dio_helper.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  DioHelper();
   runApp(const MyApp());
 }
 
